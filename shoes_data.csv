@@ -1,0 +1,25 @@
+shoes_id,brand,model,category,color,size_eu,price_idr
+1.0,Nike,Air Max 90,Running,White/Blue,44.0,2029000.0
+2.0,Adidas,Ultra Boost,Running,Black,42.5,2811000.0
+3.0,New Balance,990v5,Lifestyle,Grey,42.0,2889000.0
+4.0,Converse,Chuck Taylor,Casual,Red,45.0,937000.0
+5.0,Vans,Old Skool,Skateboarding,Black/White,43.0,1093000.0
+6.0,Puma,RS-X,Lifestyle,Multicolor,44.0,1874000.0
+7.0,Reebok,Classic Leather,Lifestyle,White,41.0,1249000.0
+8.0,Nike,Air Force 1,Casual,White,42.5,1561000.0
+9.0,Adidas,Yeezy Boost 350,Lifestyle,Earth,44.5,3593000.0
+10.0,Jordan,Air Jordan 1,Basketball,Black/Red,45.0,2655000.0
+11.0,Brooks,Ghost 14,Running,Blue/Grey,42.5,2185000.0
+12.0,Saucony,Ride 15,Running,Black/White,42.0,2029000.0
+13.0,ASICS,Gel-Kayano 28,Running,Grey/Yellow,44.0,2499000.0
+14.0,Timberland,6-Inch Premium,Boots,Wheat,43.0,3123000.0
+15.0,Dr. Martens,1460,Boots,Black,41.0,2343000.0
+16.0,Nike,Dunk Low,Skateboarding,Green/White,44.0,1561000.0
+17.0,Hoka,Bondi 7,Running,White/Black,42.5,2499000.0
+18.0,On,Cloud X,Training,Grey/Blue,42.0,2185000.0
+19.0,Birkenstock,Arizona,Sandals,Brown,45.0,2109000.0
+20.0,Crocs,Classic Clog,Casual,Purple,42.5,781000.0
+21.0,Specs,Lightspeed,Football,Navy,41.0,550000.0
+22.0,Nike,Mercurial Vapor,Football,Light Green,44.0,1200000.0
+23.0,Adidas,Predator,Football,Black,40.0,1500000.0
+24,Puma,Future Play FG,Football,White,42.0,900000.0
