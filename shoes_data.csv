@@ -22,4 +22,14 @@ shoes_id,brand,model,category,color,size_eu,price_idr
 21.0,Specs,Lightspeed,Football,Navy,41.0,550000.0
 22.0,Nike,Mercurial Vapor,Football,Light Green,44.0,1200000.0
 23.0,Adidas,Predator,Football,Black,40.0,1500000.0
-24,Puma,Future Play FG,Football,White,42.0,900000.0
+24.0,Puma,Future Play FG,Football,White,42.0,900000.0
+25.0,Adidas,Speedportal,Football,Pink,41.0,3500000.0
+26.0,Adidas,X Crazyfast Messi,Futsal,Silver,45.0,1400000.0
+27.0,Nike,Zoom Vapor 15,Futsal,Copper,39.0,1090000.0
+28.0,Specs,LS Evolution FG,Futsal,Purple,46.0,600000.0
+29.0,Nike,Phantom GX Academy,Futsal,White/Yellow,45.0,1300000.0
+30.0,Nike,Zoom Mercurial Vapor,Futsal,Pink,41.0,1280000.0
+31.0,Adidas,Top Sala,Futsal,Blue,42.0,1100000.0
+32.0,Adidas,F50,Football,White,44.0,1400000.0
+33.0,Specs,Accelerator,Football,Green,39.0,810000.0
+34,Specs,Preface,Football,Aqua,42.0,540000.0

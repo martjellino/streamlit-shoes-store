@@ -9,7 +9,8 @@ class Shoes:
         self.price_idr = price_idr
 
     def able_to_kick_the_ball(self):
-        return self.category == "Football"
+        soccer_categories = ["Football", "Futsal"]
+        return self.category in soccer_categories
 
     def able_to_run(self):
         running_categories = ["Running", "Basketball", "Football"]

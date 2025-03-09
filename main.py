@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 from libs import Shoes, Store
+import time
 
 if "store" not in st.session_state:
     st.session_state.store = Store(1, "My Shoes Store", "Rengasdengklok Street No. 45")
@@ -10,6 +11,12 @@ if "show_balloons" not in st.session_state:
 
 if "redirect_to_dashboard" not in st.session_state:
     st.session_state.redirect_to_dashboard = False
+
+if "selected_page" not in st.session_state:
+    st.session_state.selected_page = "Dashboard"
+
+if "form_submitted" not in st.session_state:
+    st.session_state.form_submitted = False
 
 
 def load_shoes_to_store():
@@ -56,12 +63,16 @@ except FileNotFoundError:
     )
     csv.to_csv(csv_file_path, index=False)
 
-# Check if we should redirect to dashboard
+# Use selected_page to control the selectbox index
+page = st.sidebar.selectbox(
+    "Select Page",
+    ["Dashboard", "Create Shoes"],
+    index=0 if st.session_state.selected_page == "Dashboard" else 1,
+)
+
+# Reset redirect flag if it's set
 if st.session_state.redirect_to_dashboard:
     st.session_state.redirect_to_dashboard = False
-    page = "Dashboard"
-else:
-    page = st.sidebar.selectbox("Select Page", ["Dashboard", "Create Shoes"])
 
 # Check if we should show balloons
 if st.session_state.show_balloons:
@@ -81,13 +92,14 @@ if page == "Create Shoes":
             "Category",
             [
                 "Running",
+                "Football",
+                "Futsal",
                 "Lifestyle",
                 "Casual",
                 "Skateboarding",
                 "Basketball",
                 "Boots",
                 "Sandals",
-                "Football",
             ],
         )
         color = st.text_input("Color")
@@ -119,8 +131,14 @@ if page == "Create Shoes":
             new_shoes = Shoes(shoes_id, brand, model, category, color, size, price)
             st.session_state.store.add_shoes_as_stock(new_shoes)
 
+            # Mark form as submitted, redirect to dashboard and show balloons
+            # st.session_state.form_submitted = True
+            st.session_state.selected_page = "Dashboard"
             st.session_state.show_balloons = True
-            st.session_state.redirect_to_dashboard = True
+            
+            st.success("Shoes added successfully! Now redirecting to Dashboard to check updated table and charts...")
+            time.sleep(3)
+
             st.rerun()
 
 
@@ -131,7 +149,7 @@ if page == "Dashboard":
     st.write("### Store Information")
     st.write(f"Store Name: {st.session_state.store.store_name}")
     st.write(f"Store Address: {st.session_state.store.store_address}")
-    
+
     st.markdown("<br><br>", unsafe_allow_html=True)
 
     # Filter section
@@ -139,7 +157,7 @@ if page == "Dashboard":
     col1, col2 = st.columns(2)
 
     with col1:
-        show_football_shoes = st.toggle("Show shoes suitable for football")
+        show_football_shoes = st.toggle("Show shoes suitable for football or futsal")
 
     with col2:
         show_running_shoes = st.toggle("Show shoes suitable for running")
@@ -152,17 +170,17 @@ if page == "Dashboard":
         football_shoes = [
             shoe
             for shoe in st.session_state.store.bunch_of_shoes
-            if shoe.category == "Football"
+            if shoe.category == "Football" or shoe.category == "Futsal"
         ]
         football_shoe_ids = [shoe.shoes_id for shoe in football_shoes]
         filtered_df = csv[
             csv["shoes_id"].astype(str).isin([str(id) for id in football_shoe_ids])
         ]
-        st.write("🥅 Showing shoes suitable for playing football")
+        st.write("🥅 Showing shoes suitable for playing football or futsal")
 
     elif show_running_shoes and not show_football_shoes:
         # Only running shoes
-        running_categories = ["Running", "Basketball", "Football"]
+        running_categories = ["Running", "Basketball", "Football", "Futsal"]
         running_shoes = [
             shoe
             for shoe in st.session_state.store.bunch_of_shoes
@@ -179,9 +197,9 @@ if page == "Dashboard":
         football_shoes = [
             shoe
             for shoe in st.session_state.store.bunch_of_shoes
-            if shoe.category == "Football"
+            if shoe.category == "Football" or shoe.category == "Futsal"
         ]
-        running_categories = ["Running", "Basketball", "Football"]
+        running_categories = ["Running", "Basketball", "Football", "Futsal"]
         running_shoes = [
             shoe
             for shoe in st.session_state.store.bunch_of_shoes
@@ -200,7 +218,7 @@ if page == "Dashboard":
     # Display the filtered data
     st.write("### Shoes Data Table")
     st.dataframe(filtered_df)
-    
+
     st.markdown("<br><br>", unsafe_allow_html=True)
 
     if not filtered_df.empty:
@@ -210,7 +228,7 @@ if page == "Dashboard":
             filtered_df["price_idr"], errors="coerce"
         )
         st.bar_chart(filtered_df.groupby("brand")["price_idr"].mean())
-        
+
         st.markdown("<br><br>", unsafe_allow_html=True)
 
         # Area Chart
@@ -218,7 +236,7 @@ if page == "Dashboard":
         category_counts = filtered_df["category"].value_counts().reset_index()
         category_counts.columns = ["category", "count"]
         st.area_chart(category_counts.set_index("category"), color="#bff3ca")
-        
+
         st.markdown("<br><br>", unsafe_allow_html=True)
 
         # Line Chart
